@@ -15,11 +15,13 @@
 \usetheme{gemini}
 \usecolortheme{uchicago}
 \usepackage{graphicx}
+\usepackage{epstopdf}
 \usepackage{booktabs}
 \usepackage{doi}
 \usepackage[numbers]{natbib}
 \usepackage[patch=none]{microtype}
 \usepackage{tikz}
+\usepackage{quantikz}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
 \usepackage{anyfontsize}
@@ -77,16 +79,10 @@
 % Body
 % ====================
 
+\logoleft{\includegraphics[height=4.0cm]{logos/KIST_CI.eps}}
+\logoright{\includegraphics[height=2.5cm]{logos/PaulLee2.eps}}
+
 \begin{document}
-\addtobeamertemplate{headline}{}
-{
-    \begin{tikzpicture}[remember picture,overlay]
-      \node [anchor=north west, inner sep=3cm] at ([xshift=0.0cm,yshift=1.0cm]current page.north west)
-      {\includegraphics[height=5.0cm]{logos/uc-logo-white.eps}}; % also try shield-white.eps
-      \node [anchor=north east, inner sep=3cm] at ([xshift=0.0cm,yshift=2.5cm]current page.north east)
-      {\includegraphics[height=8.0cm]{logos/cs-logo-white.png}};
-    \end{tikzpicture}
-}
 
 \begin{frame}[t]
 \begin{columns}[t]
@@ -101,43 +97,43 @@
   On the other hand, an additional selective phase-controlled radio-frequency (rf) driving on nuclear spins, referred as DDrf gate, enables elaborated control of individual spins. 
   The mechanisms underlying these approaches differ that dynamic decoupling relies on transverse hyperfine interaction components, whereas the DDrf gate exploits rf driving and suppresses transverse hyperfine coupling. 
   In this work, we propose a hybrid DDrf gate that leverages both mechanisms to achieve faster and more robust gate operations. 
-  This approach could enable improved quantum control and sensing capabilities.
+  The hybrid gate achieves faster and more robust operations than either the DD or DDrf approach alone, and extends high-fidelity control to nuclear spins with weak transverse hyperfine coupling.
   
   \end{alertblock}
 
   \begin{block}{Conditional Gate}
-  Beyond a mere collection of independent qubits, entanglement between the qubits is regarded as a core resourse for quantum speed up, ... .
-  Two-qubit gates is the source of entanglement between qubit, so implementing two-qubit gate in a particular physical quantum system is critical interest.
-  Generally such operation can be implemented by conditional operation, that is, a two-qubit gate acts on a control qubit and a target qubit. 
-  The operation applied to the target depends on the state of the control, its operation can be written as:  
+  Beyond a mere collection of independent qubits, entanglement between the qubits is regarded as a core resource for quantum computing.
+  Two-qubit gates are the source of entanglement between qubits, so implementing two-qubit gates in a particular physical quantum system is of critical interest.
+  Generally such an operation can be implemented by conditional operation, that is, a two-qubit gate acts on a control qubit and a target qubit.
+  The operation applied to the target depends on the state of the control qubit, and can be written as:  
   $$
   U = \ketbra{0} \otimes U_0 + \ketbra{1} \otimes U_1,
   $$
-  where $U_0$ and $U_1$ are single-qubit rotations conditioned on the control qubit state. Without loss of generality, we can write each operaion as $e^{-i \theta_{i} \vec{\sigma}_{i}}$. 
-  When the rotating axes $\vec{\sigma}$ on the target qubit are significantly different, or even antiparallel, the gate operation becomes conditional, ultimately generate entanglement. 
+  where $U_0$ and $U_1$ are single-qubit rotations conditioned on the control qubit state. Without loss of generality, we can write each operation as $e^{-i \theta_{i} \vec{\sigma}_{i}}$.
+  When the rotating axes $\vec{\sigma}$ on the target qubit are significantly different, or even antiparallel, the gate operation becomes conditional, ultimately generating entanglement. 
   \end{block}
 
   \begin{block}{Nitrogen-Vacancy (NV) center system}
-  In the nitrogen-vacancy (NV) center, such operation can be implemented by a sort of Hamiltonian engineering. 
+  In the nitrogen-vacancy (NV) center, such an operation can be implemented by a sort of Hamiltonian engineering. 
   We consider a nitrogen-vacancy (NV) center electron spin ($S = 1$) coupled to surrounding $^{13}$C nuclear spins $(I=\frac{1}{2})$ via the hyperfine interaction~\cite{taminiau2012}.
   The Hamiltonian is
   $$
-  H = \omega_0 I_z + A_\parallel S_z I_z + A_\perp S_z I_x,
+  H = \omega_L I_z + A_\parallel S_z I_z + A_\perp S_z I_x,
   $$
   where $\omega_L$ is the nuclear Larmor frequency, and $A_\parallel$, $A_\perp$ are the parallel and perpendicular hyperfine components. 
   We can rewrite Hamiltonian as:
   $$
   H = \ketbra{0} \otimes \underbrace{\omega_L I_z}_{= H_0}+ \ketbra{1} \otimes \underbrace{ (\omega_L + A_\parallel)\, I_z + A_\perp\, I_x}_{= H_1}
   $$
-  We can evaluate time evolution of $^{13}$C nuclear spin depending on NV center electron spin state in a piecewise manner. 
+  We can evaluate the time evolution of the $^{13}$C nuclear spin depending on the NV center electron spin state in a piecewise manner. 
   \end{block}
 
 
 
   \begin{block}{Dynamic Decoupling Based Conditional Gate}
-    We can enable conditional interaction by applying a dynamic decoupling sequence consisting of $N$ sequencial $\pi$-pulses. 
+    We can enable conditional interaction by applying a dynamic decoupling sequence consisting of $N$ sequential $\pi$-pulses.
     Consider the basic decoupling unit on the electron spin $\tau$-$\pi$-$2\tau$-$\pi$-$\tau$ where $\tau$ is a free evolution time.
-    The net result of this unit sequence results in rotaion by an angle $\phi$ around an axis $\vec{\sigma}_{i}$, depending on the initial state of electron spin; 
+    The net result of this unit sequence results in a rotation by an angle $\phi$ around an axis $\vec{\sigma}_{i}$, depending on the initial state of the electron spin; 
     $\vec{\sigma}_0$ for $m_s = 0$ state, and 
     $\vec{\sigma}_1$ for $m_s = -1$ state.
     If $\vec{\sigma}_0$ and $\vec{\sigma}_1$ are not parallel, the resulting conditional rotation of the nuclear spin generally entangles the electron and nuclear spins. 
@@ -146,57 +142,69 @@
 
     \begin{figure}
       \centering
-      \begin{tikzpicture}[xscale=3.5, yscale=2.0]
-        % Baseline
-        \draw[thick] (0, 0) -- (3.8, 0);
-        \node[left, font=\small\bfseries] at (-0.05, 0.45) {MW};
-        % Dots
-        \node[font=\Large] at (0.25, 0.40) {$\cdots$};
-        % π/2 pulse
-        % \fill[blue!60] (0.20, 0) rectangle (0.38, 0.8);
-        % \node[above, font=\small] at (0.29, 0.85) {$\frac{\pi}{2}$};
-        % τ
-        \draw[<->, thin] (0.42, -0.18) -- (0.95, -0.18);
-        \node[below, font=\small] at (0.685, -0.22) {$\tau$};
-        % First π pulse
-        \fill[red!70] (1.00, 0) rectangle (1.18, 0.8);
-        \node[above, font=\small] at (1.09, 0.85) {$\pi$};
-        % 2τ
-        \draw[<->, thin] (1.22, -0.18) -- (2.10, -0.18);
-        \node[below, font=\small] at (1.66, -0.22) {$2\tau$};
-        % Second π pulse
-        \fill[red!70] (2.15, 0) rectangle (2.33, 0.8);
-        \node[above, font=\small] at (2.24, 0.85) {$\pi$};
-        % τ
-        \draw[<->, thin] (2.37, -0.18) -- (2.90, -0.18);
-        \node[below, font=\small] at (2.635, -0.22) {$\tau$};
-        % Brace for unit
-        \draw[decorate, decoration={brace, amplitude=6pt, mirror}]
-          (0.42, -0.65) -- (2.90, -0.65)
-          node[midway, below=8pt, font=\small] {$\times\, N/2$};
-        % Dots
-        \node[font=\Large] at (3.45, 0.40) {$\cdots$};
-        % -π/2 pulse
-        % \fill[blue!60] (3.95, 0) rectangle (4.13, 0.8);
-        % \node[above, font=\small] at (4.04, 0.85) {$-\frac{\pi}{2}$};
-      \end{tikzpicture}
-      \caption{CPMG dynamical decoupling sequence on the NV electron spin.}
+      \begin{minipage}[c]{0.57\linewidth}
+        \centering
+        \begin{tikzpicture}[xscale=3.5, yscale=2.0]
+          % Baseline
+          \draw[thick] (0, 0) -- (3.8, 0);
+          \node[left, font=\small\bfseries] at (-0.05, 0.45) {MW};
+          % Dots
+          \node[font=\Large] at (0.25, 0.40) {$\cdots$};
+          % π/2 pulse
+          % \fill[blue!60] (0.20, 0) rectangle (0.38, 0.8);
+          % \node[above, font=\small] at (0.29, 0.85) {$\frac{\pi}{2}$};
+          % τ
+          \draw[<->, thin] (0.42, -0.18) -- (0.95, -0.18);
+          \node[below, font=\small] at (0.685, -0.22) {$\tau$};
+          % First π pulse
+          \fill[purple!70] (1.00, 0) rectangle (1.18, 0.8);
+          \node[above, font=\small] at (1.09, 0.85) {$\pi$};
+          % 2τ
+          \draw[<->, thin] (1.22, -0.18) -- (2.10, -0.18);
+          \node[below, font=\small] at (1.66, -0.22) {$2\tau$};
+          % Second π pulse
+          \fill[purple!70] (2.15, 0) rectangle (2.33, 0.8);
+          \node[above, font=\small] at (2.24, 0.85) {$\pi$};
+          % τ
+          \draw[<->, thin] (2.37, -0.18) -- (2.90, -0.18);
+          \node[below, font=\small] at (2.635, -0.22) {$\tau$};
+          % Brace for unit
+          \draw[decorate, decoration={brace, amplitude=6pt, mirror}]
+            (0.42, -0.65) -- (2.90, -0.65)
+            node[midway, below=8pt, font=\small] {$\times\, N/2$};
+          % Dots
+          \node[font=\Large] at (3.45, 0.40) {$\cdots$};
+          % -π/2 pulse
+          % \fill[blue!60] (3.95, 0) rectangle (4.13, 0.8);
+          % \node[above, font=\small] at (4.04, 0.85) {$-\frac{\pi}{2}$};
+        \end{tikzpicture}
+      \end{minipage}%
+      \hfill
+      \begin{minipage}[c]{0.40\linewidth}
+        \centering
+        \begin{quantikz}[row sep=1.3cm, column sep=0.7cm]
+          \lstick{$\mathrm{NV}^{-}$} & \ctrl{1} & \ctrl{1} & \qw \rstick{$\cdots$} \\
+          \lstick{${}^{13}\mathrm{C}$} & \gate{U(\tau)} & \gate{U(\tau)} & \qw \rstick{$\cdots$}
+        \end{quantikz}
+      \end{minipage}
+      \caption{CPMG dynamical decoupling sequence on the NV electron spin (left) and equivalent quantum circuit (right).}
     \end{figure}
 
     A dynamical decoupling sequence with the basic unit $\tau$-$\pi$-$2\tau$-$\pi$-$\tau$, repeated $N/2$ times, makes further conditional operation. 
 
     \heading{Conditional Rotation \& Resonance}
 
-    Let $V_0$ and $V_1$ are the conditional evolution operators for a single decoupling unit:
+    Let $V_0$ and $V_1$ be the conditional evolution operators for a single decoupling unit:
     \begin{align}
       V_0 &= e^{-i\tau H_0}e^{-i2\tau H_1}e^{-i\tau H_0} &= e^{-i\phi \vec{\sigma}_0} \\
-      V_1 &= e^{-i\tau H_1}e^{-i2\tau H_2}e^{-i\tau H_1} &= e^{-i\phi \vec{\sigma}_1}
+      V_1 &= e^{-i\tau H_1}e^{-i2\tau H_0}e^{-i\tau H_1} &= e^{-i\phi \vec{\sigma}_1}
     \end{align}
+    Here $\omega_0 \equiv \omega_L$ and $\omega_1 = \sqrt{(\omega_L + A_\parallel)^2 + A_\perp^2}$ are the nuclear precession frequencies for $m_s = 0$ and $m_s = -1$, respectively.
     The conditional rotation angle $\phi$ is determined by the choice of $\tau$ and NV center system configuration. 
     \begin{align}
       \cos\phi = \cos \omega_1 \tau \cos\omega_0 \tau - \frac{\omega_0 - A_{\parallel}}{\omega_1} \sin \omega_1 \tau \sin\omega_0 \tau
     \end{align}
-    We might investigate the inner product between two rotation axes. 
+    We can examine the inner product between the two rotation axes. 
     \begin{align}
       1 - \vec{\sigma}_0 \cdot \vec{\sigma}_1 = \frac{A_{\perp}^2}{\omega_0^2} \frac{(1-\cos\omega_1 \tau)(1-\cos\omega_0 \tau)}{1 + \cos\phi}
     \end{align} 
@@ -220,11 +228,11 @@
     \heading{Hamiltonian}
     In the interaction picture with respect to the electron energy splitting and neglecting non-secular terms, the Hamiltonian of the NV-$^{13}C$ system is given by
     \begin{align}
-      H = \omega_0 I_z + A_{\parallel}S_z I_z + A_{\perp}S_z I_x + 2\Omega_{\text{RF}}(\omega t + \phi) I_x
+      H = \omega_0 I_z + A_{\parallel}S_z I_z + A_{\perp}S_z I_x + 2\Omega_{\text{RF}}\cos(\omega t + \phi) I_x
     \end{align}
-    where the final term describes the interaction of the nuclear spin with a radio frequency (RF) driving field polarized along $x$ axis (on the exact same direction to hyperfine coupling), phase $\phi$ and Rabi frequency $\Omega_{\text{RF}}$. 
+    where the final term describes the interaction of the nuclear spin with a radio frequency (RF) driving field polarized along the $x$ axis (in the same direction as the hyperfine coupling), phase $\phi$ and Rabi frequency $\Omega_{\text{RF}}$. 
 
-    In the rotating frame at the rf frequency, and approximation $A_\perp \approx 0$ and $\Omega_{\text{RF}} \ll (\omega_0 - \omega_1)$ for simplicity:
+    In the rotating frame at the rf frequency, and under the approximation $A_\perp \approx 0$ and $\Omega_{\text{RF}} \ll (\omega_0 - \omega_1)$ for simplicity:
     \begin{align}
       H = \ketbra{0} \otimes \underbrace{(\omega_0 - \omega_1 )I_z}_{=H_0} + \ketbra{1} \otimes \underbrace{\Omega_{\text{RF}}( \cos\phi I_x + \sin\phi I_y )}_{=H_1}.
     \end{align}
@@ -233,63 +241,79 @@
     \heading{Pulse Sequence}
     \begin{figure}
       \centering
-      \begin{tikzpicture}[xscale=3.0, yscale=1.8]
-        % Labels
-        \node[left, font=\small\bfseries] at (-0.15, 1.65) {MW};
-        \node[left, font=\small\bfseries] at (-0.15, 0.30) {rf};
-        % MW line
-        \draw[thick] (0, 1.3) -- (6.3, 1.3);
-        % rf line
-        \draw[thick] (0, 0) -- (6.3, 0);
-        %
-        % Layout: rf pulses fill the full gaps between pi-pulses.
-        % One unit = rf1(tau) - pi1 - rf2(2tau) - pi2 - half of rf3(tau).
-        % The underbrace spans from start of rf1 to middle of rf3.
-        %
-        % rf_1 (odd, red) — width tau
-        \fill[red!40] (0.00, 0) rectangle (0.55, 0.55);
-        \node[below, font=\scriptsize] at (0.275, -0.05) {$1$};
-        % pi_1
-        \fill[purple!70] (0.55, 1.3) rectangle (0.72, 2.0);
-        \node[above, font=\small] at (0.635, 2.05) {$\pi$};
-        % rf_2 (even, blue) — width 2tau
-        \fill[blue!40] (0.72, 0) rectangle (1.82, 0.55);
-        \node[below, font=\scriptsize] at (1.27, -0.05) {$2$};
-        % pi_2
-        \fill[purple!70] (1.82, 1.3) rectangle (1.99, 2.0);
-        \node[above, font=\small] at (1.905, 2.05) {$\pi$};
-        % rf_3 (odd, red) — width 2tau, straddles unit boundary at midpoint 2.54
-        \fill[red!40] (1.99, 0) rectangle (3.09, 0.55);
-        \node[below, font=\scriptsize] at (2.54, -0.05) {$3$};
-        % pi_3
-        \fill[purple!70] (3.09, 1.3) rectangle (3.26, 2.0);
-        \node[above, font=\small] at (3.175, 2.05) {$\pi$};
-        % rf_4 (even, blue) — width 2tau
-        \fill[blue!40] (3.26, 0) rectangle (4.36, 0.55);
-        \node[below, font=\scriptsize] at (3.81, -0.05) {$4$};
-        % Dots
-        \node[font=\Large] at (5.05, 1.0) {$\cdots$};
-        % rf_K (odd, red) — width tau
-        \fill[red!40] (5.75, 0) rectangle (6.30, 0.55);
-        \node[below, font=\scriptsize] at (6.025, -0.05) {$K$};
-        % tau and 2tau arrows (between MW and rf lines)
-        \draw[<->, thin] (0.00, 0.80) -- (0.55, 0.80);
-        \node[above, font=\scriptsize] at (0.275, 0.83) {$\tau$};
-        \draw[<->, thin] (0.72, 0.80) -- (1.82, 0.80);
-        \node[above, font=\scriptsize] at (1.27, 0.83) {$2\tau$};
-        \draw[<->, thin] (1.99, 0.80) -- (3.09, 0.80);
-        \node[above, font=\scriptsize] at (2.54, 0.83) {$2\tau$};
-        % Underbrace: start of rf1 to middle of rf3 (one unit = 2 pi-pulses)
-        \draw[decorate, decoration={brace, amplitude=6pt, mirror}]
-          (0.00, -0.45) -- (2.54, -0.45)
-          node[midway, below=8pt, font=\small] {$(\tau\text{-}\pi\text{-}2\tau\text{-}\pi\text{-}\tau)^{N/2}$};
-        % Legend
-        \fill[red!40] (0.0, -1.70) rectangle (0.30, -1.45);
-        \node[right, font=\scriptsize] at (0.35, -1.475) {odd $k$: resonant for $\ket{1}$ ($m_s = -1$)};
-        \fill[blue!40] (3.6, -1.70) rectangle (3.90, -1.45);
-        \node[right, font=\scriptsize] at (3.95, -1.575) {even $k$: resonant for $\ket{0}$ ($m_s = 0$)};
-      \end{tikzpicture}
-      \caption{DDrf pulse sequence. DD $\pi$-pulses on the electron (MW) are interleaved with phase-controlled rf pulses ($k = 1, \ldots, K$; $K = N+1$) on the nuclear spin.}
+      \begin{minipage}[c]{0.55\linewidth}
+        \centering
+        \begin{tikzpicture}[xscale=2.8, yscale=1.8]
+          % Labels
+          \node[left, font=\small\bfseries] at (-0.15, 1.65) {MW};
+          \node[left, font=\small\bfseries] at (-0.15, 0.30) {rf};
+          % MW line
+          \draw[thick] (0, 1.3) -- (6.3, 1.3);
+          % rf line
+          \draw[thick] (0, 0) -- (6.3, 0);
+          %
+          % Layout: rf pulses fill the full gaps between pi-pulses.
+          % One unit = rf1(tau) - pi1 - rf2(2tau) - pi2 - half of rf3(tau).
+          % The underbrace spans from start of rf1 to middle of rf3.
+          %
+          % rf_1 (odd, red) — width tau
+          \fill[red!40] (0.00, 0) rectangle (0.55, 0.55);
+          \node[below, font=\scriptsize] at (0.275, -0.05) {$1$};
+          \node[below, font=\scriptsize] at (0.275, 0.55) {$\phi_1$};
+          % pi_1
+          \fill[purple!70] (0.55, 1.3) rectangle (0.72, 2.0);
+          \node[above, font=\small] at (0.635, 2.05) {$\pi$};
+          % rf_2 (even, blue) — width 2tau
+          \fill[blue!40] (0.72, 0) rectangle (1.82, 0.55);
+          \node[below, font=\scriptsize] at (1.27, -0.05) {$2$};
+          \node[below, font=\scriptsize] at (1.27, 0.55) {$\phi_2$};
+          % pi_2
+          \fill[purple!70] (1.82, 1.3) rectangle (1.99, 2.0);
+          \node[above, font=\small] at (1.905, 2.05) {$\pi$};
+          % rf_3 (odd, red) — width 2tau, straddles unit boundary at midpoint 2.54
+          \fill[red!40] (1.99, 0) rectangle (3.09, 0.55);
+          \node[below, font=\scriptsize] at (2.54, -0.05) {$3$};
+          \node[below, font=\scriptsize] at (2.54, 0.55) {$\phi_3$};
+          % pi_3
+          \fill[purple!70] (3.09, 1.3) rectangle (3.26, 2.0);
+          \node[above, font=\small] at (3.175, 2.05) {$\pi$};
+          % rf_4 (even, blue) — width 2tau
+          \fill[blue!40] (3.26, 0) rectangle (4.36, 0.55);
+          \node[below, font=\scriptsize] at (3.81, -0.05) {$4$};
+          \node[below, font=\scriptsize] at (3.81, 0.55) {$\phi_3$};
+          % Dots
+          \node[font=\Large] at (5.05, 0.3) {$\cdots$};
+          % rf_K (odd, red) — width tau
+          \fill[red!40] (5.75, 0) rectangle (6.30, 0.55);
+          \node[below, font=\scriptsize] at (6.025, -0.05) {$K$};
+          \node[below, font=\scriptsize] at (6.025, 0.55) {$\phi_K$};
+          % tau and 2tau arrows (between MW and rf lines)
+          \draw[<->, thin] (0.00, 0.80) -- (0.55, 0.80);
+          \node[above, font=\scriptsize] at (0.275, 0.83) {$\tau$};
+          \draw[<->, thin] (0.72, 0.80) -- (1.82, 0.80);
+          \node[above, font=\scriptsize] at (1.27, 0.83) {$2\tau$};
+          \draw[<->, thin] (1.99, 0.80) -- (3.09, 0.80);
+          \node[above, font=\scriptsize] at (2.54, 0.83) {$2\tau$};
+          % Underbrace: start of rf1 to middle of rf3 (one unit = 2 pi-pulses)
+          \draw[decorate, decoration={brace, amplitude=6pt, mirror}]
+            (0.00, -0.45) -- (2.54, -0.45)
+            node[midway, below=8pt, font=\small] {$(\tau\text{-}\pi\text{-}2\tau\text{-}\pi\text{-}\tau)^{N/2}$};
+          % Legend — stacked on the left to avoid overflow
+          \fill[red!40] (0.0, -1.55) rectangle (0.30, -1.30);
+          \node[right, font=\scriptsize] at (0.35, -1.425) {odd $k$: resonant for $\ket{1}$ ($m_s = -1$)};
+          \fill[blue!40] (0.0, -1.95) rectangle (0.30, -1.70);
+          \node[right, font=\scriptsize] at (0.35, -1.825) {even $k$: resonant for $\ket{0}$ ($m_s = 0$)};
+        \end{tikzpicture}
+      \end{minipage}%
+      \hfill
+      \begin{minipage}[c]{0.42\linewidth}
+        \centering
+        \begin{quantikz}[row sep=1.1cm, column sep=0.4cm]
+          \lstick{$\mathrm{NV}^{-}$} & \qw & \ctrl{1} & \qw & \ctrl{1} & \qw \rstick{$\cdots$} \\
+          \lstick{${}^{13}\mathrm{C}$} & \gate{R_z} & \gate{\substack{R_{\varphi} \\ (\pm\Omega\tau)}} & \gate{R_z} & \gate{\substack{R_{\varphi} \\ (\pm\Omega\tau)}} & \qw \rstick{$\cdots$}
+        \end{quantikz}
+      \end{minipage}
+      \caption{DDrf pulse sequence: MW $\pi$-pulses interleaved with phase-controlled rf pulses (left); equivalent quantum circuit showing the conditional $R_\varphi(\pm\Omega\tau)$ rotation per unit (right).}
     \end{figure}
 
     The electron spin state determines which rf pulses are resonant: odd-$k$ pulses drive the nuclear spin when the electron is in $\ket{1}$ ($m_s = -1$), while even-$k$ pulses are resonant for $\ket{0}$ ($m_s = 0$).
@@ -318,25 +342,28 @@
 
   \begin{block}{Hybrid DDrf Gate}
 
-    We propose a hybrid gate that combines both mechanisms. 
-    The transverse hyperfine interaction ($A_\perp$) exploited by the DD gate and the rf driving ($\Omega$) exploited by the DDrf gate. By allowing both contributions to act simultaneously, the hybrid approach can achieve:
+    We propose a hybrid gate that combines both mechanisms.
+    The transverse hyperfine interaction ($A_\perp$) is exploited by the DD gate, and the rf driving ($\Omega$) by the DDrf gate. By allowing both contributions to act simultaneously, the hybrid approach can achieve:
     \begin{itemize}
       \item \textbf{Faster gate operations} through constructive combination of both driving mechanisms.
-      \item \textbf{availability} that achieve high fidelity without dependence on spin configuration. 
+      \item \textbf{Broader applicability}, achieving high fidelity regardless of spin configuration.
     \end{itemize}
 
-    In order to keep conditional operation coming from the $A_\perp$ and the choice of $\tau$, we would like to choose $\tau$ such that $\vec\sigma_0 \cdot \vec{\sigma}_1 \simeq -1$ or $\tau = \frac{(2k + 1)\pi}{\omega_0 + \omega_1 }$ for a certain $k$.
-    Then, over conditional operation by dynamic decoupling, the speed of conditional operation is boosted by additional rf driving.
-    In the region of small $A_\perp$ where $\sin\beta\simeq\beta$, effectively we can combine each conditional operation addictively. That is, conditional angle $\phi \sineq \phi_{DD} + \phi_{DDrf}$.
-    That is, with chosen initial phase $\varphi = 0$, 
+    To preserve the conditional operation arising from $A_\perp$ and the choice of $\tau$, we choose $\tau$ at the DD resonance condition $\vec\sigma_0 \cdot \vec{\sigma}_1 \simeq -1$, i.e.,
+    $$\tau = \frac{(2k + 1)\pi}{\omega_0 + \omega_1}, \quad k = 0, 1, 2, \ldots$$
+    The speed of the conditional operation is then boosted by additional rf driving on top of the dynamic decoupling contribution.
+    Let $\beta = \arcsin(A_\perp / \omega_1)$ be the tilt angle of the nuclear precession axis from the $z$-axis when the electron is in $\ket{1}$.
+    In the regime of small $A_\perp$ where $\sin\beta\simeq\beta$, the two conditional rotation angles combine additively, giving $\phi \simeq \phi_{DD} + \phi_{DDrf}$.
+    With the initial phase $\varphi = 0$, the resulting conditional gate is
     \begin{align}
       U = \ketbra{0} \otimes U_0 + \ketbra{1} \otimes U_1,
     \end{align}
     where
     \begin{align}
-      U_0 &= R_x (N(\beta \sin(\omega_0\tau) + \Omega_{\text{rf}}\tau) )\\
-      U_1 &= R_x (-N(\beta \sin(\omega_0\tau) + \Omega_{\text{rf}}\tau))
+      U_0 &= R_x \!\left(N\bigl(\phi_\text{DD} + \Omega_{\text{rf}}\tau\bigr)\right)\\
+      U_1 &= R_x \!\left(-N\bigl(\phi_\text{DD} + \Omega_{\text{rf}}\tau\bigr)\right)
     \end{align}
+    The two terms in the argument correspond to the DD contribution ($\propto A_\perp$) and the rf contribution ($\propto \Omega_{\text{rf}}$), and can be tuned independently. In particular, for spins with negligible $A_\perp$ where the DD gate alone is ineffective, the rf drive provides the dominant conditional rotation, while for spins with sizable $A_\perp$ the two mechanisms reinforce each other to reduce the total gate time.
   \end{block}
 
   \begin{block}{References}
