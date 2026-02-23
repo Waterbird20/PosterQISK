@@ -11,7 +11,7 @@
 
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
-\usepackage[size=A0,orientation=portrait,scale=1.05]{beamerposter}
+\usepackage[size=A0,orientation=portrait,scale=1.00]{beamerposter}
 \usetheme{gemini}
 \usecolortheme{uchicago}
 \usepackage{graphicx}
@@ -53,7 +53,7 @@
 % Title
 % ====================
 
-\title{Enhanced Electron Nuclear control leveraging hyperfine coupling and radio-frequency drive}
+\title{Enhanced Electron Nuclear Spin Control Leveraging Hyperfine Coupling and Radio-Frequency Drive}
 
 \author{Donghun Jung\inst{1, }\inst{2}, Eunsang Lee\inst{1}, Jiwon Jeon\inst{1}, Junghyun Lee\inst{1, $\dagger$}}
 
@@ -116,18 +116,18 @@
   \end{block}
 
 
-  \begin{block}{Conditional Gate}
-  % Beyond a mere collection of independent qubits, entanglement between the qubits is regarded as a core resource for quantum computing.
-  % Two-qubit gates are the source of entanglement between qubits, so implementing two-qubit gates in a particular physical quantum system is of critical interest.
-  % Generally such an operation can be implemented by conditional operation, that is, a two-qubit gate acts on a control qubit and a target qubit.
-  The operation applied to the target depends on the state of the control qubit, and can be written as:
-  $$
-  U = \ketbra{0} \otimes U_0 + \ketbra{1} \otimes U_1,
-  $$
-  where $U_0$ and $U_1$ are single-qubit rotations conditioned on the control qubit state.
-  % Without loss of generality, we can write each operation as $e^{-i \theta_{i} \vec{\sigma}_{i}}$.
-  % When the rotating axes $\vec{\sigma}$ on the target qubit are significantly different, or even antiparallel, the gate operation becomes conditional, ultimately generating entanglement.
-  \end{block}
+  % \begin{block}{Conditional Gate}
+  % % Beyond a mere collection of independent qubits, entanglement between the qubits is regarded as a core resource for quantum computing.
+  % % Two-qubit gates are the source of entanglement between qubits, so implementing two-qubit gates in a particular physical quantum system is of critical interest.
+  % % Generally such an operation can be implemented by conditional operation, that is, a two-qubit gate acts on a control qubit and a target qubit.
+  % The operation applied to the target depends on the state of the control qubit, and can be written as:
+  % $$
+  % U = \ketbra{0} \otimes U_0 + \ketbra{1} \otimes U_1,
+  % $$
+  % where $U_0$ and $U_1$ are single-qubit rotations conditioned on the control qubit state.
+  % % Without loss of generality, we can write each operation as $e^{-i \theta_{i} \vec{\sigma}_{i}}$.
+  % % When the rotating axes $\vec{\sigma}$ on the target qubit are significantly different, or even antiparallel, the gate operation becomes conditional, ultimately generating entanglement.
+  % \end{block}
 
   \begin{block}{Dynamic Decoupling (DD)}
     We can enable conditional interaction by applying a dynamic decoupling sequence consisting of $N$ sequential $\pi$-pulses.
@@ -218,6 +218,18 @@
       1 - \vec{\sigma}_0 \cdot \vec{\sigma}_1 &= \frac{A_{\perp}^2}{\omega_0^2} \frac{(1-\cos\omega_1 \tau)(1-\cos\omega_0 \tau)}{1 + \cos\phi_{\text{DD}}}
     \end{align}
     % This simple implementation has limit (discretization, passive operation(contingent onf A_perp))
+
+    % \heading{Spectroscopy}
+
+    \begin{figure}
+      \centering
+      \includegraphics[width=0.7\linewidth]{media/CPMG.pdf}
+      \caption{
+        $\ket{+}$-state projection ($P_x$) of the CPMG sequence, with the NV electron spin initialized to $\ket{+}$ and the $^{13}$C nuclear spins in a fully mixed state.
+        The sharp resonances in the echo signal arise from coherent interaction with individual $^{13}$C nuclear spins.
+      }
+    \end{figure}
+
   \end{block}
 \end{column}
 
@@ -323,11 +335,11 @@
     \heading{Controlled Rotation}
     \begin{figure}[c]
       \centering
-      \begin{subfigure}[c]{0.25\linewidth}
+      \begin{subfigure}[c]{0.3\linewidth}
         \centering
         \includegraphics[width=\linewidth]{media/DDrf_1.pdf}
       \end{subfigure}
-      \begin{subfigure}[c]{0.25\linewidth}
+      \begin{subfigure}[c]{0.3\linewidth}
         \centering
         \includegraphics[width=\linewidth]{media/DDrf_2.pdf}
       \end{subfigure}
@@ -347,7 +359,7 @@
   \begin{block}{Hybrid DDrf Gate}
     \begin{figure}
       \centering
-      \includegraphics[width=0.3\linewidth]{media/DDrf_enhanced.pdf}
+      \includegraphics[width=0.35\linewidth]{media/DDrf_enhanced.pdf}
       \caption{Bloch sphere trajectories of the hybrid DDrf gate. The combined DD and rf contributions produce a larger conditional rotation angle $\phi_D$ (pink arrow), enabling faster operations than either mechanism alone.}
     \end{figure}
 
